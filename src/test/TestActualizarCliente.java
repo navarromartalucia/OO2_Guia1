@@ -12,6 +12,7 @@ public class TestActualizarCliente {
 		Cliente c = abm.traer(41473969);
 		System.out.println("Cliente: " + c);
 		c.setFechaDeNacimiento(LocalDate.of(1998, 8, 14));
+		c.setDni(17444627);
 		try{
 			abm.modificar(c);
 			System.out.println("Cliente: " + c);
