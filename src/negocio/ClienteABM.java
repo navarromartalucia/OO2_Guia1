@@ -28,7 +28,10 @@ public class ClienteABM {
 		//implementar antes de actualizar que no exista un cliente con el mismo
 		//documento a modificar y con el mismo id, lanzar la Exception
 		//TODO: Averiguar que wea con el id
-		if(this.traer(c.getDni()) != null ) throw new Exception("ERROR: El DNI a ingresar ya se encuentra en la base de datos");
+		Cliente comparacion = dao.traer(c.getDni());
+		if(comparacion != null ) {
+			if(!(comparacion.getIdCliente() == c.getIdCliente()))throw new Exception("ERROR: El DNI a ingresar ya se encuentra en la base de datos");
+		}
 		dao.actualizar(c);
 	}
 			
