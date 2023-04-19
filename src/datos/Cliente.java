@@ -1,5 +1,6 @@
 package datos;
 import java.time.LocalDate;
+import java.util.Set;
 
 public class Cliente {
 	private long idCliente;
@@ -8,6 +9,8 @@ public class Cliente {
 	private int dni;
 	private LocalDate fechaDeNacimiento;
 	private boolean baja;
+	private Set<Evento> eventos;
+
 
 	public Cliente(){} //siempre hay que implementar el constructor vacio
 	
@@ -76,4 +79,17 @@ public class Cliente {
 				+ fechaDeNacimiento.getDayOfMonth()+"/"+
 				fechaDeNacimiento.getMonthValue()+"/"+ fechaDeNacimiento.getYear()+" "+baja);
 	}
+	
+	public Set<Evento> getEventos() {
+		return eventos;
+	}
+		
+	protected void setEventos(Set<Evento> eventos) {
+		this.eventos = eventos;
+	}
+		
+	public boolean equals(Cliente c){
+		return (this.apellido.equalsIgnoreCase(c.apellido) && this.nombre.equalsIgnoreCase(apellido) && this.dni == c.dni);
+	}
+
 }

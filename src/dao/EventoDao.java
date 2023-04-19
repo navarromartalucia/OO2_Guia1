@@ -7,8 +7,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import datos.Cliente;
+import datos.Evento;
 
-public class ClienteDao {
+public class EventoDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -16,13 +17,13 @@ public class ClienteDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-
+	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 	
-	public int agregar(Cliente objeto) {
+	public int agregar(Evento objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -37,7 +38,7 @@ public class ClienteDao {
 		return id;
 	}
 	
-	public void actualizar(Cliente objeto) throws HibernateException {
+	public void actualizar(Evento objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -50,7 +51,7 @@ public class ClienteDao {
 		}
 	}
 	
-	public void eliminar(Cliente objeto) throws HibernateException {
+	public void eliminar(Evento objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -62,22 +63,23 @@ public class ClienteDao {
 			session.close();
 		}
 	}
-	public Cliente traer(long idCliente) throws HibernateException {
-		Cliente objeto = null;
+	
+	public Evento traer(long idEvento) throws HibernateException {
+		Evento objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Cliente) session.get(Cliente.class, idCliente);
+			objeto = (Evento) session.get(Evento.class, idEvento);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	public Cliente traer(int dni) throws HibernateException {
-		Cliente objeto = null;
+	public Evento traer(String evento) throws HibernateException {
+		Evento objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Cliente) session.createQuery("from Cliente c where c.dni="+dni).uniqueResult();
+			objeto = (Evento) session.createQuery("from Evento e where e.evento="+evento).uniqueResult();
 		} finally {
 			session.close();
 		}
@@ -85,32 +87,16 @@ public class ClienteDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Cliente> traer() throws HibernateException {
-		List<Cliente> lista=null;
+	public List<Evento> traer() throws HibernateException {
+		List<Evento> lista=null;
 		try {
 			iniciaOperacion();
-			lista=session.createQuery("from Cliente c order by c.apellido asc,c.nombre asc").list();
+			lista=session.createQuery("from Evento e order by e.fecha").list();
 		} finally {
 			session.close();
 		}
 		return lista;
 	}
 	
-	public Cliente traerClienteYEventos(long idCliente) throws HibernateException {
-		Cliente objeto = null;
-		try {
-			iniciaOperacion();
-			String hql="from Cliente c where c.idCliente =" + idCliente;
-			objeto = (Cliente) session.createQuery(hql).uniqueResult();
-			Hibernate.initialize(objeto.getEventos());
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
 
 }
-
-
-
-

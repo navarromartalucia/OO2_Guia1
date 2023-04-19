@@ -11,5 +11,9 @@
 		<property column="dni" name="dni" type="int"/>
 		<property column="fechaDeNacimiento" name="fechaDeNacimiento" type="LocalDate"/>
 		<property column="baja" name="baja" type="boolean"/>
+		<set table="eventoxcliente" name="eventos" outer-join="true">
+			<key column="idCliente"/>
+			<many-to-many column="idEvento" class="datos.Evento"/>
+		</set>
 	</class>
 </hibernate-mapping>

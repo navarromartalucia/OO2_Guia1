@@ -4,7 +4,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost/bd-hibernate-una-entidad?serverTimezone=UTC</property>
+		<property name="connection.url">jdbc:mysql://localhost/bd-hibernate-muchos-a-muchos?serverTimezone=UTC</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
 		<property name="connection.pool_size">1</property>
@@ -12,5 +12,6 @@
 		<property name="show_sql">true</property> <!-- en true muestra hql en consola-->
 		<!--Mapeo Entidades -->
 		<mapping resource="mapeos/Cliente.hbm.xml"/>
+		<mapping resource="mapeos/Evento.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
