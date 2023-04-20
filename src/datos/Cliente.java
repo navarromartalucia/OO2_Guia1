@@ -77,7 +77,7 @@ public class Cliente {
 	public String toString(){
 		return (idCliente+" "+apellido+" "+nombre+" DNI: "+dni+" F.de Nacimiento:"
 				+ fechaDeNacimiento.getDayOfMonth()+"/"+
-				fechaDeNacimiento.getMonthValue()+"/"+ fechaDeNacimiento.getYear()+" "+baja);
+				fechaDeNacimiento.getMonthValue()+"/"+ fechaDeNacimiento.getYear()+" "+baja + "\n		");
 	}
 	
 	public Set<Evento> getEventos() {
@@ -91,5 +91,12 @@ public class Cliente {
 	public boolean equals(Cliente c){
 		return (this.apellido.equalsIgnoreCase(c.apellido) && this.nombre.equalsIgnoreCase(apellido) && this.dni == c.dni);
 	}
-
+	
+	public boolean agregarEventos(Evento e) {
+		return this.eventos.add(e);
+	}
+	
+	public boolean eliminarEventos(Evento e) {
+		return this.eventos.remove(e);
+	}
 }

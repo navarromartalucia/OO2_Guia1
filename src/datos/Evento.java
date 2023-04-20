@@ -16,6 +16,18 @@ public class Evento {
 		this.evento = evento;
 		this.fecha = fecha;
 	}
+	
+	public void setIdEvento(long idEvento) {
+		this.idEvento = idEvento;
+	}
+
+	public long getIdEvento () {
+		return this.idEvento;
+	}
+	
+	protected void setIdCliente(long idEvento) {
+		this.idEvento = idEvento;
+	}
 
 	public String getEvento() {
 		return evento;
@@ -46,6 +58,14 @@ public class Evento {
 	}
 	
 	public String toString() {
-		return "\n" + this.idEvento + ", evento: " + this.evento + "\n		fecha: " + this.fecha;
+		return "\n" + this.idEvento + ", evento: " + this.evento + ", fecha: " + this.fecha + "\n 	Clientes: " + this.clientes;
+	}
+	
+	public boolean agregarClientes(Cliente c) {
+		return this.clientes.add(c);
+	}
+	
+	public boolean eliminarClientes(Cliente c) {
+		return this.clientes.remove(c);
 	}
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import dao.ClienteDao;
 import datos.Cliente;
+import datos.Evento;
 
 public class ClienteABM {
 	ClienteDao dao = new ClienteDao();
@@ -45,5 +46,19 @@ public class ClienteABM {
 			
 	public List<Cliente> traer() {
 		return dao.traer();
+	}
+	
+	public void agregarEvento(Cliente c, Evento e) {
+		c.agregarEventos(e);
+		dao.actualizar(c);
+	}
+	
+	public void eliminarEvento(Cliente c, Evento e) {
+		c.eliminarEventos(e);
+		dao.actualizar(c);
+	}
+	
+	public Cliente traerEventosDeUnCliente(Cliente c){
+		return dao.traerClienteYEventos(c.getIdCliente());
 	}
 }

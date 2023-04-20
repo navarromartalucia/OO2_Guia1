@@ -98,5 +98,18 @@ public class EventoDao {
 		return lista;
 	}
 	
-
+	public Evento traerEventoYClientes(long idEvento) throws HibernateException {
+		Evento objeto= null;
+		try {
+			iniciaOperacion();
+			String hql="from Evento e where e.idEvento ="+idEvento;
+			objeto=(Evento) session.createQuery(hql).uniqueResult();
+			Hibernate.initialize(objeto.getClientes());
+		}
+		finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
 }
